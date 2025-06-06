@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface CartItem {
   _id: string;
@@ -141,10 +142,12 @@ export default function PaymentPage() {
         backgroundColor: 'rgba(0,0,0,0.3)',  // Slight dark overlay for text visibility
       }}
     >
-      <img
+      <Image
         src="/images/rider-cartoon.png"
         alt="Rider delivering food"
-        className="absolute bottom-0 left-4 w-48 opacity-20 pointer-events-none"
+        width={192}
+        height={192}
+        className="absolute bottom-0 left-4 opacity-20 pointer-events-none"
       />
 
       <form
