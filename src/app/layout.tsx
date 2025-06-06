@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: "BiteRush",
   description: "Your ultimate food delivery app",
   icons: {
-    icon: '/logo.png',
+    icon: '/favicon.ico',
   },
 };
 
