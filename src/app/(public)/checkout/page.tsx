@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -39,10 +40,12 @@ export default function CheckoutPage() {
     <div className="relative min-h-screen flex items-center justify-center bg-gray-100 overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1470&q=80"
           alt="checkout bg"
-          className="w-full h-full object-cover opacity-50 blur-sm"
+          fill
+          className="object-cover opacity-50 blur-sm"
+          priority
         />
       </div>
 

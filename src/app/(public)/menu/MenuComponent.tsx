@@ -33,7 +33,40 @@ export default function MenuComponent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const fetchProducts = async () => {
+  const applyFilters = useCallback((
+    productsToFilter: Product[],
+    currentFilters = filters
+  ) => {
+    let filtered = [...productsToFilter];
+
+    if (currentFilters.category && currentFilters.category !== "all") {
+      filtered = filtered.filter(
+        (product) => product.category === currentFilters.category
+      );
+    }
+
+    if (currentFilters.minPrice) {
+      filtered = filtered.filter(
+        (product) => product.price >= parseFloat(currentFilters.minPrice)
+      );
+    }
+
+    if (currentFilters.maxPrice) {
+      filtered = filtered.filter(
+        (product) => product.price <= parseFloat(currentFilters.maxPrice)
+      );
+    }
+
+    if (currentFilters.minRating) {
+      filtered = filtered.filter(
+        (product) => product.rating >= parseFloat(currentFilters.minRating)
+      );
+    }
+
+    setProducts(filtered);
+  }, [filters]);
+
+  const fetchProducts = useCallback(async () => {
     try {
       setIsLoading(true);
       const response = await fetch("/api/products");
@@ -65,44 +98,11 @@ export default function MenuComponent() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [searchParams, applyFilters]);
 
   useEffect(() => {
     fetchProducts();
-  }, [searchParams]);
-
-  const applyFilters = (
-    productsToFilter: Product[],
-    currentFilters = filters
-  ) => {
-    let filtered = [...productsToFilter];
-
-    if (currentFilters.category && currentFilters.category !== "all") {
-      filtered = filtered.filter(
-        (product) => product.category === currentFilters.category
-      );
-    }
-
-    if (currentFilters.minPrice) {
-      filtered = filtered.filter(
-        (product) => product.price >= parseFloat(currentFilters.minPrice)
-      );
-    }
-
-    if (currentFilters.maxPrice) {
-      filtered = filtered.filter(
-        (product) => product.price <= parseFloat(currentFilters.maxPrice)
-      );
-    }
-
-    if (currentFilters.minRating) {
-      filtered = filtered.filter(
-        (product) => product.rating >= parseFloat(currentFilters.minRating)
-      );
-    }
-
-    setProducts(filtered);
-  };
+  }, [fetchProducts]);
 
   const updateURLWithFilters = useCallback(
     (updatedFilters: { [s: string]: unknown } | ArrayLike<unknown>) => {

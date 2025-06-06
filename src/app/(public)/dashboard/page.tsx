@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Utensils } from "lucide-react";
+import Image from "next/image";
 
 export default function DashboardGreeting() {
   const { data: session, status } = useSession();
@@ -112,10 +113,12 @@ export default function DashboardGreeting() {
                 >
                   {chatbotVisible ? 'Close Chatbot' : 'Can I help you?'}
                 </button>
-                <img
-                  src="/bot.gif" // Path to the bot gif image in the public folder
+                <Image
+                  src="/bot.gif"
                   alt="Bot Cartoon"
-                  className="w-24 h-24 ml-4" // Increased size of the gif
+                  width={96}
+                  height={96}
+                  className="ml-4"
                 />
               </div>
             </div>
