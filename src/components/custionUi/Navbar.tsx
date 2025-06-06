@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
@@ -38,7 +39,14 @@ export default function Navbar() {
       <div className="container mx-auto flex flex-row justify-between items-center">
         {/* Logo / Brand */}
         <div className="flex items-center gap-4">
-          <Link href={session ? "/dashboard" : "/"}>
+          <Link href={session ? "/dashboard" : "/"} className="flex items-center gap-2">
+            <Image
+              src="/logo.png"
+              alt="BiteRush Logo"
+              width={32}
+              height={32}
+              className="rounded-full"
+            />
             <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">
               BiteRush
             </h2>
