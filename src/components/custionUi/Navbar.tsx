@@ -43,11 +43,11 @@ export default function Navbar() {
             <Image
               src="/logo.png"
               alt="BiteRush Logo"
-              width={32}
-              height={32}
+              width={64}
+              height={64}
               className="rounded-full"
             />
-            <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">
+            <h2 className="text-foreground text-2xl font-bold leading-tight tracking-[-0.015em]">
               BiteRush
             </h2>
           </Link>
